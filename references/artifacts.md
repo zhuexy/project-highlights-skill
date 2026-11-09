@@ -2,10 +2,14 @@
 
 ## 文件组织
 
-默认以目标项目根目录为基准，按需要创建文件：
+默认把材料存放在目标仓库之外的用户级 Codex 数据目录：优先 `$CODEX_HOME/project-highlights/<project-id>/`，未设置 `CODEX_HOME` 时使用 `$HOME/.codex/project-highlights/<project-id>/`；Windows 使用用户 profile 下的 `.codex`。
+
+稳定的 `project-id` 使用 `<repo-slug>-<hash>`：`repo-slug` 用于识别项目，`hash` 是规范化项目身份字符串的 SHA-256 前 12 位。身份字符串优先取 Git remote；GitHub 的 SSH 与 HTTPS 形式需归一成相同的 `github.com/owner/repo`，并去除 `.git` 后缀与尾部斜线。其他 remote 统一主机名大小写并去除 `.git` 后缀与尾部斜线。没有 remote 时，使用规范化仓库根目录的绝对路径；Windows 路径比较时忽略大小写并统一分隔符。索引记录该身份字符串、标识和来源。
+
+按需要创建以下文件：
 
 ```text
-project-highlights/
+<user-codex-home>/project-highlights/<project-id>/
   index.md
   H01-payment-callback/
     analysis.md
@@ -13,7 +17,11 @@ project-highlights/
     resume.md
 ```
 
-上面是组织示例，目录名要与实际候选对应。阶段一只创建或更新索引；选定亮点后才创建分析目录；开始访谈和生成素材时再分别建立后续文件。不要提前创建空文件或虚构示例亮点。
+上面是组织示例，目录名要与实际候选对应。阶段一只创建或更新索引；选定亮点后才创建分析目录；开始访谈和生成素材时再分别建立后续文件。不要提前创建空文件或虚构示例亮点。用户明确指定其他输出目录时遵从。
+
+索引至少记录规范化仓库根路径、Git remote（若有）、规范化项目身份字符串、项目标识和标识来源。续接时用相同规则重算 ID；remote 改变但仓库根路径一致时，检查已有索引中的根路径以找到并续接旧材料，而不是另起一份。不要仅按仓库名匹配。
+
+旧版本可能在仓库根目录创建了 `project-highlights/`。可以读取旧索引以续接上下文，但后续写入默认的用户级目录；不自动删除、覆盖或移动旧文件。
 
 H01 等 ID 分配后保持稳定；排序变化不重新编号。slug 使用简短、可读的字母或数字与连字符。文件之间使用相对链接。用户指定输出目录或已有兼容结构时沿用，不另建重复材料。
 

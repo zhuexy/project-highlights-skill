@@ -9,7 +9,9 @@
 - 已选定某个亮点，希望追踪完整调用链、分析方案取舍和异常边界。
 - 想把已经确认的个人贡献整理成 STAR 和简历表述。
 
-Skill 不预设 Java 或特定框架，会根据项目内容识别技术栈。默认只读分析业务源码；分析结果和访谈进度保存在目标项目的 `project-highlights/` 目录。
+Skill 不预设 Java 或特定框架，会根据项目内容识别技术栈。默认只读分析业务源码；项目分析材料保存在仓库外的用户级 Codex 数据目录，避免意外提交到业务仓库。
+
+默认位置是 `$CODEX_HOME/project-highlights/<project-id>/`；如果没有设置 `CODEX_HOME`，则使用 `$HOME/.codex/project-highlights/<project-id>/`（Windows 位于用户 profile 下的 `.codex`）。项目标识由仓库名和规范化 Git remote URL 的 SHA-256 前缀组成；没有 remote 时改用规范化仓库根路径。这样同名仓库也会分开保存。索引会记录项目路径和标识，供以后续接。
 
 ## 使用方法
 
@@ -70,7 +72,7 @@ $project-highlights 读取已有的 project-highlights 材料，从上次进度�
 按需创建以下文件，不会预先生成空文件：
 
 ```text
-project-highlights/
+<user-codex-home>/project-highlights/<project-id>/
   index.md
   H01-payment-callback/
     analysis.md
